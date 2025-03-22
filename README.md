@@ -1,8 +1,8 @@
 # EX01 Developing a Simple Webserver
 ## Date:
-
+21-03-2025
 ## AIM:
-To develop a simple webserver to serve html pages and display the list of protocols in TCP/IP Protocol Suite.
+To develop a simple webserver to serve html pages and display the types of heading lines
 
 ## DESIGN STEPS:
 ### Step 1: 
@@ -36,9 +36,43 @@ Start the server script and check for errors.
 Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 
 ## PROGRAM:
+```from http.server import HTTPServer, BaseHTTPRequestHandler
+content = """
+<!DOCTYPE html>
+<html>
+<body>
 
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+
+</body>
+</html>
+
+
+"""
+class myhandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        print("request received")
+        self.send_response(200)
+        self.send_header('content-type', 'text/html; charset=utf-8')
+        self.end_headers()
+        self.wfile.write(content.encode())
+server_address = ('',80)
+httpd = HTTPServer(server_address,myhandler)
+print("my webserver is running...")
+httpd.serve_forever()
+```
 
 ## OUTPUT:
+
+![Screenshot 2025-03-21 184510](https://github.com/user-attachments/assets/50dbb195-126c-4f2a-9cf1-b8f11d1b82a2)
+
+
+![Uploading Screenshot 2025-03-21 184447.png…]()
 
 
 ## RESULT:
